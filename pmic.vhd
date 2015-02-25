@@ -28,7 +28,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -68,6 +68,8 @@ architecture structural of pmic is
 			timer_1x: in std_logic;
 			timer_2x: in std_logic;
 			timer_3x: in std_logic;
+			timer_4x : in std_logic;
+			timer_5x : in std_logic;
 
 			en_33v: out std_logic;
 			en_25v: out std_logic;
@@ -84,16 +86,22 @@ architecture structural of pmic is
 	component timer
 		generic	
 		(
-			clk_freq_hz : real; 
-			max_time_s : real
+			max_count : integer;
+			limit_1x : integer;
+			limit_2x : integer;
+			limit_3x : integer;
+			limit_4x : integer;
+			limit_5x : integer
 		);
 		port
 		(
+			clk : in std_logic;
+			reset : in std_logic;
 			done_1x : out std_logic;
 			done_2x : out std_logic;
 			done_3x : out std_logic;
-			reset : in  std_logic;
-			clk : in  std_logic
+			done_4x : out std_logic;
+			done_5x : out std_logic
 		);
 	end component;
 	
@@ -104,6 +112,8 @@ architecture structural of pmic is
 	signal timer_1x: std_logic;
 	signal timer_2x: std_logic;
 	signal timer_3x: std_logic;
+	signal timer_4x: std_logic;
+	signal timer_5x: std_logic;
 	signal timer_reset: std_logic;
 	signal timer_reset_fsm: std_logic;
 	
@@ -124,6 +134,8 @@ begin
 			timer_1x => timer_1x,
 			timer_2x => timer_2x,
 			timer_3x => timer_3x,
+			timer_4x => timer_4x,
+			timer_5x => timer_5x,
 			en_33v => en_33v,
 			en_25v => en_25v,
 			en_12v => en_12v,
@@ -138,14 +150,20 @@ begin
 	T1: timer	
 		generic map
 		(
-			clk_freq_hz => CLK_TIME_HZ,
-			max_time_s => 0.5
+			max_count => 10000000,
+			limit_1x => 10000000,
+			limit_2x => 15000000,
+			limit_3x => 10000000,
+			limit_4x => 5000000,
+			limit_5x => 5000000
 		)
 		port map 
 		(
 			done_1x => timer_1x,
 			done_2x => timer_2x,
 			done_3x => timer_3x,
+			done_4x => timer_4x,
+			done_5x => timer_5x,
 			clk => clk,
 			reset => timer_reset
 		);

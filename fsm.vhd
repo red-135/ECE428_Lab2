@@ -40,6 +40,8 @@ entity fsm is
 		timer_1x : in std_logic;
 		timer_2x : in std_logic;
 		timer_3x : in std_logic;
+		timer_4x : in std_logic;
+		timer_5x : in std_logic;
 		
 		en_33v : out std_logic;
 		en_25v : out std_logic;
@@ -140,7 +142,7 @@ begin
 			-- -----------------------------------------------------------------
 			
 			when sen_33v =>
-				if (timer_2x = '1') then
+				if (timer_1x = '1') then
 					next_state <= sen_25v;
 				else
 					next_state <= sen_33v;
@@ -160,14 +162,14 @@ begin
 				next_state <= soff;
 				
 			when sdis_25v =>
-				if (timer_1x = '1') then
+				if (timer_5x = '1') then
 					next_state <= sdis_33v;
 				else
 					next_state <= sdis_25v;
 				end if;
 				
 			when sdis_12v =>
-				if (timer_1x = '1') then
+				if (timer_4x = '1') then
 					next_state <= sdis_25v;
 				else
 					next_state <= sdis_12v;
@@ -178,7 +180,7 @@ begin
 			-- -----------------------------------------------------------------
 			
 			when sen_33v_lp =>
-				if (timer_3x = '1') then
+				if (timer_1x = '1') then
 					next_state <= sen_25v_lp;
 				else
 					next_state <= sen_33v_lp;
@@ -194,7 +196,7 @@ begin
 				next_state <= slp;
 				
 			when sdis_25v_lp =>
-				if (timer_1x = '1') then
+				if (timer_5x = '1') then
 					next_state <= sen_33v_lp;
 				else
 					next_state <= sen_25v_lp;
@@ -210,7 +212,7 @@ begin
 			when slp_to_sdis_12v_lp =>
 				if (onoff = '1') then
 					next_state <= slp;
-				elsif (onoff ='0' and timer_1x = '1') then
+				elsif (onoff ='0' and timer_3x = '1') then
 					next_state <= soff;
 				else
 					next_state <= slp_to_sdis_12v_lp;
@@ -219,7 +221,7 @@ begin
 			when slp_to_sen_33v_lp =>
 				if (low_power = '1') then
 					next_state <= slp;
-				elsif (low_power = '0' and timer_2x = '1') then
+				elsif (low_power = '0' and timer_3x = '1') then
 					next_state <= sen_33v_lp;
 				else
 					next_state <= slp_to_sen_33v_lp;
@@ -228,7 +230,7 @@ begin
 			when son_to_sdis_12v =>
 				if (onoff = '1') then
 					next_state <= son;
-				elsif (onoff = '0' and timer_2x = '1') then
+				elsif (onoff = '0' and timer_3x = '1') then
 					next_state <= sdis_12v;
 				else
 					next_state <= son_to_sdis_12v;
@@ -237,7 +239,7 @@ begin
 			when son_to_sdis_25v_lp =>
 				if (low_power = '0') then
 					next_state <= son;
-				elsif (low_power = '1' and timer_1x = '1') then
+				elsif (low_power = '1' and timer_4x = '1') then
 					next_state <= sdis_25v_lp;
 				else
 					next_state <= son_to_sdis_25v_lp;

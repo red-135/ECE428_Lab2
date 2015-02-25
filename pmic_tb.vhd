@@ -68,7 +68,7 @@ ARCHITECTURE behavior OF pmic_tb IS
    signal ready : std_logic;
 
    -- Clock period definitions
-   constant clk_period : time := 100 us;
+   constant clk_period : time := 100 ns;
  
 BEGIN
  
@@ -103,15 +103,15 @@ BEGIN
 		wait for 1000 ms;	
 		reset <= '0';
 
-		-- Test Low Power Start-Up
-		low_power <= '1';
+		-- Test Full Power Start-Up
+		low_power <= '0';
 		onoff <= '1';
 		wait for 5000 ms;
 		onoff <= '0';
 		wait for 5000 ms;
-
-		-- Test Full Power Start-Up
-		low_power <= '0';
+		
+		-- Test Low Power Start-Up
+		low_power <= '1';
 		onoff <= '1';
 		wait for 5000 ms;
 		onoff <= '0';
