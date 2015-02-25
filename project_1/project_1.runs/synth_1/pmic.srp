@@ -1,0 +1,461 @@
+Release 14.7 - xst P.20131013 (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.10 secs
+ 
+--> Reading design: pmic.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "pmic.prj"
+
+---- Target Parameters
+Target Device                      : xc6slx45csg324-3
+Output File Name                   : "pmic.ngc"
+
+---- Source Options
+Top Module Name                    : pmic
+
+---- Target Options
+LUT Combining                      : auto
+Add Generic Clock Buffer(BUFG)     : 16
+
+---- General Options
+Optimization Goal                  : speed
+Optimization Effort                : 1
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "c:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/ipcore_dir/dcm.vhd" into library work
+Parsing entity <dcm>.
+Parsing architecture <xilinx> of entity <dcm>.
+Parsing VHDL file "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/debounce.vhd" into library work
+Parsing entity <debounce>.
+Parsing architecture <behavioral> of entity <debounce>.
+Parsing VHDL file "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/timer.vhd" into library work
+Parsing entity <timer>.
+Parsing architecture <behavioral> of entity <timer>.
+Parsing VHDL file "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/fsm.vhd" into library work
+Parsing entity <fsm>.
+Parsing architecture <behavioral> of entity <fsm>.
+Parsing VHDL file "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/pmic.vhd" into library work
+Parsing package <PMIC_PACK>.
+Parsing entity <pmic>.
+Parsing architecture <structural> of entity <pmic>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <pmic> (architecture <structural>) from library <work>.
+
+Elaborating entity <dcm> (architecture <xilinx>) from library <work>.
+
+Elaborating entity <fsm> (architecture <behavioral>) from library <work>.
+WARNING:HDLCompiler:92 - "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/fsm.vhd" Line 165: timer_5x should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/fsm.vhd" Line 172: timer_4x should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/fsm.vhd" Line 199: timer_5x should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/fsm.vhd" Line 242: timer_4x should be on the sensitivity list of the process
+
+Elaborating entity <timer> (architecture <behavioral>) with generics from library <work>.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <pmic>.
+    Related source file is "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/pmic.vhd".
+    Summary:
+	no macro.
+Unit <pmic> synthesized.
+
+Synthesizing Unit <dcm>.
+    Related source file is "c:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/ipcore_dir/dcm.vhd".
+    Summary:
+	no macro.
+Unit <dcm> synthesized.
+
+Synthesizing Unit <fsm>.
+    Related source file is "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/fsm.vhd".
+    Found 5-bit register for signal <current_state>.
+    Found 1-bit register for signal <timer_reset_internal>.
+INFO:Xst:1799 - State sdis_33v_lp is never reached in FSM <current_state>.
+INFO:Xst:1799 - State sdis_12v_lp is never reached in FSM <current_state>.
+    Found finite state machine <FSM_0> for signal <current_state>.
+    -----------------------------------------------------------------------
+    | States             | 20                                             |
+    | Transitions        | 42                                             |
+    | Inputs             | 8                                              |
+    | Outputs            | 14                                             |
+    | Clock              | clk (rising_edge)                              |
+    | Reset              | reset (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | soff                                           |
+    | Power Up State     | soff                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 5-bit comparator not equal for signal <n0001> created at line 86
+    Summary:
+	inferred   1 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   1 Finite State Machine(s).
+Unit <fsm> synthesized.
+
+Synthesizing Unit <timer>.
+    Related source file is "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/timer.vhd".
+        max_count = 15000000
+        limit_1x = 10000000
+        limit_2x = 15000000
+        limit_3x = 10000000
+        limit_4x = 5000000
+        limit_5x = 5000000
+    Found 32-bit register for signal <countup>.
+    Found 32-bit adder for signal <countup[31]_GND_16_o_add_1_OUT> created at line 64.
+    Found 32-bit comparator greater for signal <GND_16_o_countup[31]_LessThan_1_o> created at line 63
+    Found 32-bit comparator lessequal for signal <n0003> created at line 70
+    Found 32-bit comparator lessequal for signal <n0007> created at line 88
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  32 D-type flip-flop(s).
+	inferred   3 Comparator(s).
+Unit <timer> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 1
+ 32-bit adder                                          : 1
+# Registers                                            : 2
+ 1-bit register                                        : 1
+ 32-bit register                                       : 1
+# Comparators                                          : 4
+ 32-bit comparator greater                             : 1
+ 32-bit comparator lessequal                           : 2
+ 5-bit comparator not equal                            : 1
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <timer>.
+The following registers are absorbed into counter <countup>: 1 register on signal <countup>.
+Unit <timer> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Counters                                             : 1
+ 32-bit up counter                                     : 1
+# Registers                                            : 1
+ Flip-Flops                                            : 1
+# Comparators                                          : 4
+ 32-bit comparator greater                             : 1
+ 32-bit comparator lessequal                           : 2
+ 5-bit comparator not equal                            : 1
+# FSMs                                                 : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <current_state[1:18]> with one-hot encoding.
+------------------------------------------
+ State              | Encoding
+------------------------------------------
+ soff               | 000000000000000001
+ son                | 000000000000001000
+ slb                | 000000000001000000
+ slp                | 000000000100000000
+ sen_33v            | 000000000000000100
+ sen_25v            | 000000100000000000
+ sen_12v            | 000001000000000000
+ sdis_33v           | 000100000000000000
+ sdis_25v           | 000010000000000000
+ sdis_12v           | 000000000010000000
+ sen_33v_lp         | 001000000000000000
+ sen_25v_lp         | 010000000000000000
+ sen_12v_lp         | 000000000000000010
+ sdis_33v_lp        | unreached
+ sdis_25v_lp        | 100000000000000000
+ sdis_12v_lp        | unreached
+ slp_to_sdis_12v_lp | 000000001000000000
+ slp_to_sen_33v_lp  | 000000010000000000
+ son_to_sdis_12v    | 000000000000010000
+ son_to_sdis_25v_lp | 000000000000100000
+------------------------------------------
+
+Optimizing unit <pmic> ...
+WARNING:Xst:1293 - FF/Latch <T1/countup_24> has a constant value of 0 in block <pmic>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <T1/countup_25> has a constant value of 0 in block <pmic>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <T1/countup_26> has a constant value of 0 in block <pmic>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <T1/countup_27> has a constant value of 0 in block <pmic>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <T1/countup_28> has a constant value of 0 in block <pmic>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <T1/countup_29> has a constant value of 0 in block <pmic>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <T1/countup_30> has a constant value of 0 in block <pmic>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <T1/countup_31> has a constant value of 0 in block <pmic>. This FF/Latch will be trimmed during the optimization process.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 0) on block pmic, actual ratio is 0.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 43
+ Flip-Flops                                            : 43
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : pmic.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 166
+#      GND                         : 1
+#      INV                         : 2
+#      LUT1                        : 23
+#      LUT2                        : 8
+#      LUT3                        : 10
+#      LUT4                        : 11
+#      LUT5                        : 18
+#      LUT6                        : 28
+#      MUXCY                       : 40
+#      VCC                         : 1
+#      XORCY                       : 24
+# FlipFlops/Latches                : 43
+#      FDC                         : 18
+#      FDCE                        : 24
+#      FDP                         : 1
+# Clock Buffers                    : 2
+#      BUFG                        : 2
+# IO Buffers                       : 9
+#      IBUF                        : 4
+#      IBUFG                       : 1
+#      OBUF                        : 4
+# DCMs                             : 1
+#      DCM_SP                      : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx45csg324-3 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:              43  out of  54576     0%  
+ Number of Slice LUTs:                  100  out of  27288     0%  
+    Number used as Logic:               100  out of  27288     0%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    100
+   Number with an unused Flip Flop:      57  out of    100    57%  
+   Number with an unused LUT:             0  out of    100     0%  
+   Number of fully used LUT-FF pairs:    43  out of    100    43%  
+   Number of unique control sets:         2
+
+IO Utilization: 
+ Number of IOs:                           9
+ Number of bonded IOBs:                   9  out of    218     4%  
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:                2  out of     16    12%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+clk_ext                            | DCM_SP:CLKFX           | 43    |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -3
+
+   Minimum period: 0.642ns (Maximum Frequency: 1556.893MHz)
+   Minimum input arrival time before clock: 5.678ns
+   Maximum output required time after clock: 5.546ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk_ext'
+  Clock period: 0.642ns (frequency: 1556.893MHz)
+  Total number of paths / destination ports: 2888 / 91
+-------------------------------------------------------------------------
+Delay:               6.423ns (Levels of Logic = 9)
+  Source:            T1/countup_13 (FF)
+  Destination:       F1/timer_reset_internal (FF)
+  Source Clock:      clk_ext rising 0.1X
+  Destination Clock: clk_ext rising 0.1X
+
+  Data Path: T1/countup_13 to F1/timer_reset_internal
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             7   0.447   1.118  T1/countup_13 (T1/countup_13)
+     LUT5:I0->O            1   0.203   0.000  T1/Mcompar_done_1x_lut<1> (T1/Mcompar_done_1x_lut<1>)
+     MUXCY:S->O            1   0.172   0.000  T1/Mcompar_done_1x_cy<1> (T1/Mcompar_done_1x_cy<1>)
+     MUXCY:CI->O           1   0.019   0.000  T1/Mcompar_done_1x_cy<2> (T1/Mcompar_done_1x_cy<2>)
+     MUXCY:CI->O           1   0.019   0.000  T1/Mcompar_done_1x_cy<3> (T1/Mcompar_done_1x_cy<3>)
+     MUXCY:CI->O          16   0.213   1.109  T1/Mcompar_done_1x_cy<4> (timer_1x)
+     LUT6:I4->O            1   0.203   0.944  F1/current_state_next_state[4]1_SW0 (N33)
+     LUT6:I0->O            1   0.203   0.684  F1/current_state_next_state[4]1 (F1/next_state[4])
+     LUT6:I4->O            1   0.203   0.580  F1/next_state[4]_current_state[4]_not_equal_0_o_SW0_SW0 (N25)
+     LUT5:I4->O            1   0.205   0.000  F1/next_state[4]_current_state[4]_not_equal_0_o (F1/next_state[4]_current_state[4]_not_equal_0_o)
+     FDC:D                     0.102          F1/timer_reset_internal
+    ----------------------------------------
+    Total                      6.423ns (1.989ns logic, 4.434ns route)
+                                       (31.0% logic, 69.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk_ext'
+  Total number of paths / destination ports: 116 / 57
+-------------------------------------------------------------------------
+Offset:              5.678ns (Levels of Logic = 5)
+  Source:            low_power (PAD)
+  Destination:       F1/timer_reset_internal (FF)
+  Destination Clock: clk_ext rising 0.1X
+
+  Data Path: low_power to F1/timer_reset_internal
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            16   1.222   1.005  low_power_IBUF (low_power_IBUF)
+     LUT2:I1->O            1   0.205   0.827  F1/current_state_FSM_FFd10-In1_SW1 (N20)
+     LUT6:I2->O            3   0.203   0.879  F1/current_state_FSM_FFd10-In2 (F1/current_state_FSM_FFd10-In)
+     LUT6:I3->O            1   0.205   0.827  F1/current_state_next_state[0] (F1/next_state[0])
+     LUT5:I1->O            1   0.203   0.000  F1/next_state[4]_current_state[4]_not_equal_0_o (F1/next_state[4]_current_state[4]_not_equal_0_o)
+     FDC:D                     0.102          F1/timer_reset_internal
+    ----------------------------------------
+    Total                      5.678ns (2.140ns logic, 3.538ns route)
+                                       (37.7% logic, 62.3% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk_ext'
+  Total number of paths / destination ports: 27 / 4
+-------------------------------------------------------------------------
+Offset:              5.546ns (Levels of Logic = 3)
+  Source:            F1/current_state_FSM_FFd8 (FF)
+  Destination:       ready (PAD)
+  Source Clock:      clk_ext rising 0.1X
+
+  Data Path: F1/current_state_FSM_FFd8 to ready
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q             10   0.447   0.961  F1/current_state_FSM_FFd8 (F1/current_state_FSM_FFd8)
+     LUT2:I0->O            1   0.203   0.580  F1/current_state__n0103<3>_SW0 (N3)
+     LUT6:I5->O            1   0.205   0.579  F1/current_state__n0103<3> (ready_OBUF)
+     OBUF:I->O                 2.571          ready_OBUF (ready)
+    ----------------------------------------
+    Total                      5.546ns (3.426ns logic, 2.120ns route)
+                                       (61.8% logic, 38.2% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock clk_ext
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk_ext        |    6.423|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 9.00 secs
+Total CPU time to Xst completion: 9.34 secs
+ 
+--> 
+
+Total memory usage is 197048 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   12 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
+

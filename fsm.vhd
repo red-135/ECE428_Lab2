@@ -96,7 +96,7 @@ begin
 	--- NEXT STATE LOGIC
 	--- ========================================================================
 	
-	process(current_state, onoff, low_battery, low_power, timer_1x, timer_2x, timer_3x)
+	process(current_state, onoff, low_battery, low_power, timer_1x, timer_2x, timer_3x, timer_4x, timer_5x)
 	begin
 		case current_state is
 			
@@ -252,7 +252,7 @@ begin
 	--- NEXT OUTPUT LOGIC
 	--- ========================================================================
 	
-	process(current_state, onoff, low_battery,timer_1x, timer_2x, timer_3x)
+	process(current_state, onoff, low_battery,timer_1x, timer_2x, timer_3x, timer_4x, timer_5x)
 	begin
 		case current_state is
 			-- -----------------------------------------------------------------

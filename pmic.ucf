@@ -1,0 +1,10 @@
+NET "clk_ext" LOC = L15;
+NET "en_12v" LOC = U18;
+NET "en_25v" LOC = M14;
+NET "en_33v" LOC = N14;
+INST "ready_OBUF" LOC = L14;
+NET "ready" LOC = L14;
+NET "reset" LOC = N4;
+NET "onoff" LOC = A10;
+NET "low_power" LOC = D14;
+NET "low_battery" LOC = C14;

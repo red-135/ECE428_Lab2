@@ -1,0 +1,5 @@
+vhdl work "c:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/ipcore_dir/dcm.vhd"
+vhdl work "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/debounce.vhd"
+vhdl work "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/timer.vhd"
+vhdl work "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/fsm.vhd"
+vhdl work "C:/Users/Steven/Documents/School/ECE_428/Lab-2-Xilinx/Lab-2-PMIC/pmic.vhd"

@@ -41,7 +41,7 @@ ARCHITECTURE behavior OF pmic_tb IS
     COMPONENT pmic
 		PORT 
 		(
-			clk : IN  std_logic;
+			clk_ext : IN  std_logic;
 			reset : IN  std_logic;
 			onoff : IN  std_logic;
 			low_battery : IN  std_logic;
@@ -68,14 +68,14 @@ ARCHITECTURE behavior OF pmic_tb IS
    signal ready : std_logic;
 
    -- Clock period definitions
-   constant clk_period : time := 100 ns;
+   constant clk_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
 	uut: pmic 
 		PORT MAP (
-			clk => clk,
+			clk_ext => clk,
 			reset => reset,
 			onoff => onoff,
 			low_battery => low_battery,

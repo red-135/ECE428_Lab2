@@ -1,0 +1,10 @@
+set -loop_iteration_limit 1000
+run
+-ifn pmic.prj
+-top pmic
+-p xc6slx45csg324-3
+-ofn pmic.ngc
+-opt_mode speed
+-opt_level 1
+-lc auto
+-bufg 16

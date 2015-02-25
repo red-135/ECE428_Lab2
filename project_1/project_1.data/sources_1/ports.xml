@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Interface Version="1" Minor="1">
+	<Ifc Id="ROOT" Top="1">
+		<Port Id="clk_ext" Dir="IN"/>
+		<Port Id="reset" Dir="IN"/>
+		<Port Id="onoff" Dir="IN"/>
+		<Port Id="low_battery" Dir="IN"/>
+		<Port Id="low_power" Dir="IN"/>
+		<Port Id="en_33v" Dir="OUT"/>
+		<Port Id="en_25v" Dir="OUT"/>
+		<Port Id="en_12v" Dir="OUT"/>
+		<Port Id="ready" Dir="OUT"/>
+	</Ifc>
+</Interface>
+

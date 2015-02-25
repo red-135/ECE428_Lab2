@@ -38,7 +38,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity pmic is
 		port
 		(
-			clk: in std_logic;
+			clk_ext: in std_logic;
 			reset: in std_logic;
 			onoff: in std_logic;
 			low_battery: in std_logic;
@@ -52,6 +52,18 @@ entity pmic is
 end pmic;
 
 architecture structural of pmic is
+	
+	--- ========================================================================
+	--- COMPONENT DECLARATION - DCM
+	--- ========================================================================
+	
+	component dcm
+		port
+		(
+			CLK_IN1: in std_logic;
+			CLK_OUT1: out std_logic
+		);
+	end component;
 	
 	--- ========================================================================
 	--- COMPONENT DECLARATION - FSM
@@ -116,9 +128,21 @@ architecture structural of pmic is
 	signal timer_5x: std_logic;
 	signal timer_reset: std_logic;
 	signal timer_reset_fsm: std_logic;
+	signal clk: std_logic;
 	
 begin
 
+	--- ========================================================================
+	--- PORT MAP - FSM
+	--- ========================================================================
+	
+	D1: dcm
+		port map
+		(
+			CLK_OUT1 => clk,
+			CLK_IN1 => clk_ext
+		);
+		
 	--- ========================================================================
 	--- PORT MAP - FSM
 	--- ========================================================================
