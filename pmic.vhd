@@ -150,7 +150,7 @@ begin
 	T1: timer	
 		generic map
 		(
-			max_count => 10000000,
+			max_count => 15000000,
 			limit_1x => 10000000,
 			limit_2x => 15000000,
 			limit_3x => 10000000,

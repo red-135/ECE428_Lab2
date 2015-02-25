@@ -149,7 +149,7 @@ begin
 				end if;
 				
 			when sen_25v =>
-				if (timer_3x = '1') then
+				if (timer_2x = '1') then
 					next_state <= sen_12v;
 				else
 					next_state <= sen_25v;
