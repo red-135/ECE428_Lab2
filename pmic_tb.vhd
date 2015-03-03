@@ -124,6 +124,7 @@ BEGIN
 		low_power <= '0';
 		wait for 5000 ms;
 		low_power <= '1';
+		wait for 5000 ms;
 		onoff <= '0';
 		wait for 5000 ms;
 
