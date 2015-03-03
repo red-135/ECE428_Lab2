@@ -197,9 +197,9 @@ begin
 				
 			when sdis_25v_lp =>
 				if (timer_5x = '1') then
-					next_state <= sen_33v_lp;
+					next_state <= sdis_33v_lp;
 				else
-					next_state <= sen_25v_lp;
+					next_state <= sdis_25v_lp;
 				end if;
 				
 			when sdis_12v_lp =>
