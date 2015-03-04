@@ -54,7 +54,7 @@ end fsm;
 architecture behavioral of fsm is
 	type state_type is 
 	(
-		soff, son, slb, slp,
+		soff, son, slb, slb_lp, slp,
 		sen_33v, sen_25v, sen_12v, 
 		sdis_33v, sdis_25v, sdis_12v,
 		sen_33v_lp, sen_25v_lp, sen_12v_lp, 
@@ -127,9 +127,14 @@ begin
 				
 			when slb =>
 				next_state <= sdis_12v;
+		
+			when slb_lp =>
+				next_state <= sdis_12v_lp;
 				
 			when slp =>
-				if (onoff = '1' and low_power = '0') then
+				if (low_battery = '1') then
+					next_state <= slb_lp;
+				elsif (onoff = '1' and low_power = '0') then
 					next_state <= slp_to_sen_33v_lp;
 				elsif (onoff = '0' and timer_1x = '1') then
 					next_state <= slp_to_sdis_12v_lp;
@@ -271,6 +276,11 @@ begin
 			when slb =>
 				en_33v <= '1';
 				en_25v <= '1';
+				en_12v <= '1';
+				ready <= '0';
+			when slb_lp =>
+				en_33v <= '0';
+				en_25v <= '0';
 				en_12v <= '1';
 				ready <= '0';
 			when slp =>
