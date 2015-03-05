@@ -117,9 +117,9 @@ begin
 			when son =>
 				if (onoff = '1' and low_battery = '1') then
 					next_state <= slb;
-				elsif (onoff = '1' and low_power = '1') then
+				elsif (onoff = '1' and low_power = '1' and low_battery = '0') then
 					next_state <= son_to_sdis_25v_lp;
-				elsif (onoff = '0' and low_battery = '0') then
+				elsif (onoff = '0') then
 					next_state <= son_to_sdis_12v;
 				else
 					next_state <= son;
@@ -132,11 +132,11 @@ begin
 				next_state <= sdis_12v_lp;
 				
 			when slp =>
-				if (low_battery = '1') then
+				if (onoff = '1' and low_battery = '1') then
 					next_state <= slb_lp;
-				elsif (onoff = '1' and low_power = '0') then
+				elsif (onoff = '1' and low_power = '0' and low_battery = '0') then
 					next_state <= slp_to_sen_33v_lp;
-				elsif (onoff = '0' and timer_1x = '1') then
+				elsif (onoff = '0') then
 					next_state <= slp_to_sdis_12v_lp;
 				else
 					next_state <= slp;
@@ -201,7 +201,7 @@ begin
 				next_state <= slp;
 				
 			when sdis_25v_lp =>
-				if (timer_5x = '1') then
+				if (timer_4x = '1') then
 					next_state <= sdis_33v_lp;
 				else
 					next_state <= sdis_25v_lp;
@@ -224,13 +224,20 @@ begin
 				end if;
 				
 			when slp_to_sen_33v_lp =>
-				if (low_power = '1') then
-					next_state <= slp;
-				elsif (low_power = '0' and timer_3x = '1') then
-					next_state <= sen_33v_lp;
-				else
-					next_state <= slp_to_sen_33v_lp;
-				end if;
+				next_state <= sen_33v_lp;
+				
+-- ======== OLD CODE ========================================================
+-- This old code includes a delay on this transition that has been removed.
+--
+--			when slp_to_sen_33v_lp =>
+--				if (low_power = '1') then
+--					next_state <= slp;
+--				elsif (low_power = '0' and timer_3x = '1') then
+--					next_state <= sen_33v_lp;
+--				else
+--					next_state <= slp_to_sen_33v_lp;
+--				end if;
+-- ======== OLD CODE ========================================================
 				
 			when son_to_sdis_12v =>
 				if (onoff = '1') then
@@ -244,11 +251,24 @@ begin
 			when son_to_sdis_25v_lp =>
 				if (low_power = '0') then
 					next_state <= son;
-				elsif (low_power = '1' and timer_4x = '1') then
+				elsif (low_power = '1' and timer_3x = '1') then
 					next_state <= sdis_25v_lp;
 				else
 					next_state <= son_to_sdis_25v_lp;
 				end if;
+
+-- ======== OLD CODE ========================================================
+-- This old code includes a different delay on this transition.
+--
+--			when son_to_sdis_25v_lp =>
+--				if (low_power = '0') then
+--					next_state <= son;
+--				elsif (low_power = '1' and timer_4x = '1') then
+--					next_state <= sdis_25v_lp;
+--				else
+--					next_state <= son_to_sdis_25v_lp;
+--				end if;
+-- ======== OLD CODE ========================================================
 				
 		end case;
 	end process;
@@ -333,7 +353,7 @@ begin
 				en_33v <= '1';
 				en_25v <= '1';
 				en_12v <= '1';
-				ready <= '1';
+				ready <= '0';
 			when sen_12v_lp =>
 				en_33v <= '0';
 				en_25v <= '0';
