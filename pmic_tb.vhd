@@ -69,6 +69,10 @@ ARCHITECTURE behavior OF pmic_tb IS
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
+	
+	-- Delay definitions
+	constant res_delay : time := 1000 ms;
+	constant std_delay : time := 5000 ms;
  
 BEGIN
  
@@ -100,33 +104,71 @@ BEGIN
 	begin
 		-- Reset Circuit
 		reset <= '1';
-		wait for 1000 ms;	
+		wait for res_delay;	
 		reset <= '0';
 
 		-- Test Full Power Start-Up
 		low_power <= '0';
+		low_battery <= '0';
 		onoff <= '1';
-		wait for 5000 ms;
+		wait for std_delay;
 		onoff <= '0';
-		wait for 5000 ms;
+		wait for std_delay;
 		
 		-- Test Low Power Start-Up
 		low_power <= '1';
+		low_battery <= '0';
 		onoff <= '1';
-		wait for 5000 ms;
+		wait for std_delay;
 		onoff <= '0';
-		wait for 5000 ms;
+		wait for std_delay;
 		
 		-- Test Low Power to Full Power Start-Up and Back
 		low_power <= '1';
+		low_battery <= '0';
 		onoff <= '1';
-		wait for 5000 ms;
+		wait for std_delay;
 		low_power <= '0';
-		wait for 5000 ms;
+		wait for std_delay;
 		low_power <= '1';
-		wait for 5000 ms;
+		wait for std_delay;
 		onoff <= '0';
-		wait for 5000 ms;
+		wait for std_delay;
+		
+		-- Test Start-Up with Low Battery
+		low_power <= '0';
+		low_battery <= '1';
+		onoff <= '1';
+		wait for std_delay;
+		low_battery <= '0';
+		onoff <= '0';
+		wait for std_delay;
+		
+		-- Test Full Power Start-Up with Low Battery Shut-Down
+		low_power <= '0';
+		low_battery <= '0';
+		onoff <= '1';
+		wait for std_delay;
+		low_battery <= '1';
+		wait for std_delay;
+		low_battery <= '0';
+		onoff <= '0';
+		
+		-- Test Low Power Start-Up with Low Battery Shut-Down
+		low_power <= '1';
+		low_battery <= '0';
+		onoff <= '1';
+		wait for std_delay;
+		low_battery <= '1';
+		wait for std_delay;
+		low_battery <= '0';
+		onoff <= '0';
+		
+		-- Reset Circuit
+		low_power <= '0';
+		low_battery <= '0';
+		onoff <= '0';
+		reset <= '1';
 
 		wait;
 	end process;
